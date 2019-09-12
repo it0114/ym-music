@@ -1,0 +1,303 @@
+@import "common";
+
+.header {
+  width: 100%;
+  height: 88 /100rem;
+  padding: 0 20/100rem;
+  box-sizing: border-box;
+  position: fixed;
+  background: skyblue;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  .header-center {
+    width: 100%;
+    height: 100%;
+    float: left;
+    .header-center-box {
+      height: 72/100rem;
+      margin: 0 (56 + 32 + 32)/100rem;
+      background: #f7f7f7;
+      border-radius: 36/100rem;
+      margin-top: 8 /100rem;
+      position: relative;
+      overflow: hidden;
+      img {
+        .vCenter();
+        left: 92/100rem;
+      }
+      input {
+        width: 100%;
+        height: 100%;
+        border: none;
+        outline: none;
+        padding-left: (92 + 42 + 10)/100rem;
+        box-sizing: border-box;
+        font-size: 30 /100rem;
+        color: #c9c9c9;
+
+      }
+      .header-title {
+        display: none;
+      }
+      .header-switch {
+        display: none;
+      }
+    }
+  }
+  .header-left {
+    width: 56 /100rem;
+    height: 56/100rem;
+    float: left;
+    margin-left: -100%;
+    margin-top: 16/100rem;
+    background: url("../images/topbar-it666-discern.png") no-repeat;
+    background-size: 100% auto;
+  }
+  .header-cancle {
+    display: none;
+  }
+  .header-right {
+    width: 56 /100rem;
+    height: 56/100rem;
+    float: left;
+    margin-left: -56/100rem;
+    margin-top: 16/100rem;
+    background: url("../images/topbar-it666-play.png") no-repeat;
+    background-size: 100% auto;
+  }
+  &.active {
+    .header-center-box {
+      margin-left: 0;
+      margin-right: (2 * 120) /100rem;
+      img {
+        left: 22/100rem;
+      }
+      input {
+        padding-left: (22 + 42 + 10 ) /100rem;
+      }
+    }
+    .header-cancle {
+      display: inline-block;
+      float: left;
+      margin-left: -200/100rem;
+      line-height: 88/100rem;
+      a {
+        font-size: 32/100rem;
+        color: #333;
+        font-weight: bold;
+      }
+    }
+    .header-left {
+      display: none;
+    }
+    .header-right {
+      background: url("../images/topbar-it666-category.png") no-repeat;
+      background-size: 100% auto;
+    }
+
+  }
+  &.video {
+    .header-left {
+      background: url("../images/topbar-it666-video.png") no-repeat;
+      background-size: 100% auto;
+    }
+  }
+  &.me {
+    .header-left {
+      background: url("../images/topbar-it666-cloud.png") no-repeat;
+      background-size: 100% auto;
+    }
+    .header-center {
+      .header-center-box {
+        background: transparent;
+        img {
+          display: none;
+        }
+        input {
+          display: none;
+        }
+        .header-title {
+          display: block;
+          line-height: 72/100rem;
+          text-align: center;
+          font-size: 34 / 100rem;
+          font-weight: bold;
+          color: #333;
+        }
+      }
+    }
+  }
+  &.friend {
+    .header-left {
+      background: url("../images/topbar-it666-add.png") no-repeat;
+      background-size: 100% auto;
+    }
+    .header-center {
+      .header-center-box {
+        background: transparent;
+        img {
+          display: none;
+        }
+        input {
+          display: none;
+        }
+        .header-switch {
+          display: block;
+          border: 1px solid #ffcbc8;
+          width: 280 /100rem;
+          height: 58 /100rem;
+          border-radius: 29 / 100rem;
+          margin: 0 auto;
+          position: relative;
+          display: flex;
+          overflow: hidden;
+          i {
+            display: block;
+            width: 140 / 100rem;
+            height: 100%;
+            background: #fd271b;
+            border-radius: 29 / 100rem;
+            position: absolute;
+            top: 0;
+            left: 0;
+          }
+          span {
+            display: inline-block;
+            position: relative;
+            z-index: 1;
+            width: 140 / 100rem;
+            height: 100%;
+            line-height: 58/100rem;
+            text-align: center;
+            font-size: 34 /100rem;
+            font-weight: bold;
+            color: #fd271b;
+            &.active {
+              color: #fff;
+            }
+          }
+        }
+      }
+    }
+
+  }
+  &.account {
+    .header-left {
+      background: url("../images/topbar-it666-scan.png") no-repeat;
+      background-size: 100% auto;
+    }
+    .header-center {
+      .header-center-box {
+        background: transparent;
+        img {
+          display: none;
+        }
+        input {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+.footer {
+  width: 100%;
+  height: 98 / 100rem;
+  background: skyblue;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  ul {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    li {
+      text-align: center;
+      margin: 0 46/100rem;
+      img {
+        display: block;
+        width: 56 / 100rem;
+        height: 56 / 100rem;
+        margin-top: 10 / 100rem;
+      }
+      span {
+        font-size: 18 / 100rem;
+      }
+      &.active {
+        img {
+          background: #fd271b;
+          border-radius: 50%;
+        }
+        span {
+          color: #fd271b;
+        }
+      }
+    }
+  }
+}
+
+.main {
+  width: 100%;
+  height: 100%;
+  .main-in {
+    width: 100%;
+    padding: 0 30/100rem;
+    box-sizing: border-box;
+    .pull-down {
+      width: 100%;
+      height: 88/100rem;
+      position: relative;
+      z-index: 1;
+      img {
+        .center();
+      }
+      svg {
+        .center();
+      }
+    }
+    .pull-up {
+      width: 100%;
+      height: 98 / 100rem;
+      p {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24 / 100rem;
+      }
+    }
+    .swiper-container {
+      width: 690 /100rem;
+      height: 266 /100rem;
+      margin-top: 30 /100rem;
+      border-radius: 10/100rem;
+      .swiper-slide{
+        position: relative;
+        span{
+          position: absolute;
+          bottom: 0;
+          right: 0;
+          display: inline-block;
+          padding: 5 /100rem 10/100rem;
+          background: #51a2f2;
+          font-size: 22 /100rem;
+          color: #fff;
+          border-top-left-radius: 15 / 100rem;
+        }
+      }
+    }
+    .swiper-pagination {
+      .my-bullet {
+        display: inline-block;
+        width: 14 /100rem;
+        height: 14 /100rem;
+        margin: 0 6/100rem;
+        background: rgba(255,255,255,0.6);
+        border-radius: 50%;
+      }
+      .my-bullet-active {
+        background: #fd271b;
+      }
+    }
+  }
+}
