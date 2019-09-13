@@ -44,7 +44,6 @@ $(function () {
     // 2. 默认先隐藏路径
     $("#refreshLogo").css({"stroke-dasharray": length});
     $("#refreshLogo").css({"stroke-dashoffset": length});
-
     //3. 创建 IScroll
     let myScroll = new IScroll('.main', {
         mouseWheel: false,
@@ -128,6 +127,8 @@ $(function () {
             if (data.code === 200) {
                 let html = template('bannerSlide', data);
                 $('.swiper-wrapper').html(html);
+                // iScroll重新刷新方法
+                myScroll.refresh();
 
                 //设置首页banner
                 let mySwiper = new Swiper('.swiper-container', {
@@ -162,9 +163,23 @@ $(function () {
     $(".nav i").text(new Date().getDate());
 
     /*创建推荐歌单*/
-    //..超出两行显示 省略号(...)
+    HomeApis.getHomeRecommend()
+        .then(function (data) {
+            if (data.code === 200) {
+                console.log(data);
+                let html = template('recommendItem', data);
 
-    $(".recommend-title").forEach(function(ele,index){
-        $clamp(ele, {clamp: 2})
-    });
+                // iScroll重新刷新方法
+                myScroll.refresh();
+                $('.recommend-bottom').html(html);
+                //如果创建成功 ,
+                //..超出两行显示 省略号(...)
+                $(".recommend-title").forEach(function (ele, index) {
+                    $clamp(ele, {clamp: 2})
+                });
+            }
+        })
+        .catch(function (err) {
+            console.log(err);
+        })
 });

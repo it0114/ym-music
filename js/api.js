@@ -4,6 +4,8 @@
     axios.defaults.baseURL = 'http://music.it666.com:3666';
     //配置全局超时时间(毫秒)
     axios.defaults.timeout = 10000;
+    //解决跨域问题 ( 添加请求头 )
+    axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
     class YMHttp {
         //配置get请求
@@ -43,8 +45,11 @@
     class HomeApis {
         static getHomeBanner() {
             // type:2 表示手机端数据
-            return YMHttp.get("/banner", {type: 2});
+            return YMHttp.get("/banner?date" + Date.now(), {type: 2});
+        }
 
+        static getHomeRecommend() {
+            return YMHttp.get("/personalized?date" + Date.now());
         }
     }
 

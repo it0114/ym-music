@@ -25,7 +25,9 @@
     </script>
     <link rel="stylesheet" href="./css/reset.css">
     <link rel="stylesheet" href="./css/swiper.css">
-    <link rel="stylesheet/less" href="./css/index.less">
+    <script>
+        document.write('<link href="./css/index.less?v=' + new Date().getTime() + '" rel="stylesheet" type="text/less"/>');
+    </script>
 </head>
 <body>
 <!--双飞翼布局
@@ -70,9 +72,7 @@
         </div>
         <!--轮播图-->
         <div class="swiper-container">
-            <div class="swiper-wrapper">
-
-            </div>
+            <div class="swiper-wrapper"></div>
             <!-- 如果需要分页器 -->
             <div class="swiper-pagination"></div>
         </div>
@@ -110,72 +110,8 @@
                 <h3>推荐歌单</h3>
                 <span>歌单广场</span>
             </div>
-            <div class="recommend-bottom">
-                <ul>
-                    <li>
-                        <div>
-                            <img src="images/test.jpg" class="fluid-img">
-                            <p>
-                                <img src="images/home-small-play.png">
-                                <span>160万</span>
-                            </p>
-                        </div>
-                        <p class="recommend-title">盛夏之时,共赴一场少年之约</p>
-                    </li>
-                    <li>
-                        <div>
-                            <img src="images/test.jpg" class="fluid-img">
-                            <p>
-                                <img src="images/home-small-play.png">
-                                <span>160万</span>
-                            </p>
-                        </div>
-                        <p class="recommend-title">盛夏之时,共赴一场少年之约</p>
-                    </li>
-                    <li>
-                        <div>
-                            <img src="images/test.jpg" class="fluid-img">
-                            <p>
-                                <img src="images/home-small-play.png">
-                                <span>160万</span>
-                            </p>
-                        </div>
-                        <p class="recommend-title">盛夏之时,共赴一场少年之约</p>
-                    </li>
-                    <li>
-                        <div>
-                            <img src="images/test.jpg" class="fluid-img">
-                            <p>
-                                <img src="images/home-small-play.png">
-                                <span>160万</span>
-                            </p>
-                        </div>
-                        <p class="recommend-title">盛夏之时,共赴一场少年之约</p>
-                    </li>
-                    <li>
-                        <div>
-                            <img src="images/test.jpg" class="fluid-img">
-                            <p>
-                                <img src="images/home-small-play.png">
-                                <span>160万</span>
-                            </p>
-                        </div>
-                        <p class="recommend-title">盛夏之时,共赴一场少年之约</p>
-                    </li>
-                    <li>
-                        <div>
-                            <img src="images/test.jpg" class="fluid-img">
-                            <p>
-                                <img src="images/home-small-play.png">
-                                <span>160万</span>
-                            </p>
-                        </div>
-                        <p class="recommend-title">盛夏之时,共赴一场少年之约</p>
-                    </li>
-                </ul>
-            </div>
+            <div class="recommend-bottom"></div>
         </div>
-
         <!--下拉加载更多-->
         <div class="pull-up">
             <p>
@@ -213,7 +149,7 @@
 </div>
 <!--尾部 End-->
 
-
+<!--获取首页轮播图数据-->
 <script id="bannerSlide" type="text/html">
     <% for(let i = 0; i < banners.length; i++ ) {%>
     <div class="swiper-slide">
@@ -222,9 +158,54 @@
     </div>
     <% } %>
 </script>
-
+<!--获取首页推荐歌单数据-->
+<script id="recommendItem" type="text/html">
+    <ul>
+        <% for(let i = 0; i < 6; i++ ) {%>
+        <li id="<%=result[i].id%>" title="<%=result[i].copywriter%>">
+            <div>
+                <img src="<%=result[i].picUrl%>" class="fluid-img">
+                <p>
+                    <img src="images/home-small-play.png">
+                    <%
+                    //处理播放量
+                    //处理 亿
+                    let num = result[i].playCount;
+                    let res = 0;
+                    if (num / 100000000 > 1) {
+                    let temp = num / 100000000 + "";
+                    //判断整除后的数是否包含 .
+                    if (temp.indexOf(".") === -1) {
+                    res = (num / 100000000) + "亿";
+                    } else {
+                    //如果不包含 . ,那么则保留一位小数
+                    res = (num / 100000000).toFixed(1) + "亿";
+                    }
+                    //处理 万
+                    } else if (num / 10000 > 1) {
+                    let temp = num / 10000 + "";
+                    //判断整除后的数是否包含 .
+                    if (temp.indexOf(".") === -1) {
+                    res = (num / 10000) + "万";
+                    } else {
+                    //如果不包含 . ,那么则保留一位小数
+                    res = (num / 10000).toFixed(1) + "万";
+                    }
+                    } else {
+                    res = num;
+                    }
+                    %>
+                    <span><%=res%></span>
+                </p>
+            </div>
+            <p class="recommend-title"><%=result[i].name%></p>
+        </li>
+        <% } %>
+    </ul>
+</script>
 
 </body>
+
 <script src="js/less.js"></script>
 <script src="js/zepto.js"></script>
 <script src="js/fx.js"></script>
@@ -232,8 +213,10 @@
 <script src="js/iscroll-probe.js"></script>
 <script src="js/swiper.js"></script>
 <script src="js/axios.js"></script>
-<script src="js/api.js"></script>
 <script src="js/clamp.js"></script>
 <script src="js/template-web.js"></script>
-<script src="js/index.js"></script>
+<script>
+    document.write('<script src="js/api.js?v=' + new Date().getTime() + '"><\/script\>');
+    document.write('<script src="js/index.js?v=' + new Date().getTime() + '"><\/script\>');
+</script>
 </html>
