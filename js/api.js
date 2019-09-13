@@ -7,11 +7,11 @@
 
     class YMHttp {
         //配置get请求
-        static get(url = "", data = {}) {
+        static get(url = "", data = {},) {
             return new Promise(function (resolve, reject) {
                 //地址就是你传入的地址, 参数就是你传入的参数
                 axios.get(url, {
-                    params: data
+                    params: data,
                 })
                     .then(function (response) {
                         resolve(response.data)
