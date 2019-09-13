@@ -156,5 +156,8 @@ $(function () {
         })
         .catch(function(err){
             console.log(err);
-        })
+        });
+
+    /*创建首页导航*/
+    $(".nav i").text(new Date().getDate());
 });
