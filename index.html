@@ -112,6 +112,14 @@
             </div>
             <div class="recommend-bottom"></div>
         </div>
+        <!--独家放送-->
+        <div class="exclusive">
+            <div class="exclusive-top">
+                <h3>独家放送</h3>
+                <span>独家剧场</span>
+            </div>
+            <div class="exclusive-bottom"></div>
+        </div>
         <!--下拉加载更多-->
         <div class="pull-up">
             <p>
@@ -202,6 +210,22 @@
         </li>
         <% } %>
     </ul>
+</script>
+<!--获取首页独家放送数据-->
+<script id="exclusiveItem" type="text/html">
+
+    <ul>
+        <% for(let i = 0; i < result.length; i++ ) {%>
+        <li>
+            <div>
+                <i></i>
+                <img src="<%=result[i].sPicUrl%>" class="fluid-img">
+            </div>
+            <p class="exclusive-title"><%=result[i].name%></p>
+        </li>
+        <% } %>
+    </ul>
+
 </script>
 
 </body>

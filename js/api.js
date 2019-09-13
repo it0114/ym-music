@@ -12,7 +12,7 @@
         static get(url = "", data = {},) {
             return new Promise(function (resolve, reject) {
                 //地址就是你传入的地址, 参数就是你传入的参数
-                axios.get(url, {
+                axios.get(url +"?date" + Date.now(), {
                     params: data,
                 })
                     .then(function (response) {
@@ -28,7 +28,7 @@
         static post(url = "", data = {}) {
             return new Promise(function (resolve, reject) {
                 //地址就是你传入的地址, 参数就是你传入的参数
-                axios.post(url, {
+                axios.post(url +"?date" + Date.now(), {
                     params: data
                 })
                     .then(function (response) {
@@ -43,13 +43,18 @@
 
     //2. 首页数据
     class HomeApis {
+        //获取轮播图数据
         static getHomeBanner() {
             // type:2 表示手机端数据
-            return YMHttp.get("/banner?date" + Date.now(), {type: 2});
+            return YMHttp.get("/banner", {type: 2});
         }
-
+        //获取推荐歌单数据
         static getHomeRecommend() {
-            return YMHttp.get("/personalized?date" + Date.now());
+            return YMHttp.get("/personalized");
+        }
+        //获取独家放送数据
+        static getHomeExclusive(){
+            return YMHttp.get("/personalized/privatecontent")
         }
     }
 

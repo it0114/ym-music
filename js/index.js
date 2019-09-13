@@ -166,12 +166,10 @@ $(function () {
     HomeApis.getHomeRecommend()
         .then(function (data) {
             if (data.code === 200) {
-                console.log(data);
                 let html = template('recommendItem', data);
-
+                $('.recommend-bottom').html(html);
                 // iScroll重新刷新方法
                 myScroll.refresh();
-                $('.recommend-bottom').html(html);
                 //如果创建成功 ,
                 //..超出两行显示 省略号(...)
                 $(".recommend-title").forEach(function (ele, index) {
@@ -181,5 +179,26 @@ $(function () {
         })
         .catch(function (err) {
             console.log(err);
+        });
+
+    /*创建独家放送*/
+    HomeApis.getHomeExclusive()
+        .then(function(data){
+            if(data.code === 200){
+                console.log(data);
+                let html = template('exclusiveItem', data);
+                $('.exclusive-bottom').html(html);
+                // iScroll重新刷新方法
+                myScroll.refresh();
+                //处理文字显示
+                $(".exclusive-title").forEach(function (ele, index) {
+                    $clamp(ele, {clamp: 2})
+                });
+            }
         })
+        .catch(function(err){
+            console.log(err);
+        });
+
+
 });
