@@ -117,24 +117,24 @@ $(function () {
                 isPullUp = false;
                 isRefresh = false;
                 myScroll.maxScrollY = maxOffsetY + bottomHergit;
-                myScroll.scrollTo(0,myScroll.maxScrollY);
+                myScroll.scrollTo(0, myScroll.maxScrollY);
                 $(".pull-up>p>span").text("下拉加载更多...");
             }, 1000)
         }
     });
     //获取网络数据
     HomeApis.getHomeBanner()
-        .then(function(data){
-            if(data.code === 200){
-                let html = template('bannerSlide',data);
+        .then(function (data) {
+            if (data.code === 200) {
+                let html = template('bannerSlide', data);
                 $('.swiper-wrapper').html(html);
 
                 //设置首页banner
-                let mySwiper = new Swiper ('.swiper-container',{
+                let mySwiper = new Swiper('.swiper-container', {
                     loop: true, // 循环模式选项
                     //自动轮播
-                    autoplay:{
-                        delay:3000,
+                    autoplay: {
+                        delay: 3000,
                         stopOnLastSlide: false,
                         disableOnInteraction: false,
                     },
@@ -142,22 +142,29 @@ $(function () {
                     pagination: {
                         el: '.swiper-pagination',
                         //设置分页器指标样式
-                        bulletClass : 'my-bullet',//需设置.my-bullet样式
+                        bulletClass: 'my-bullet',//需设置.my-bullet样式
                         //配置分页器活动指标
                         bulletActiveClass: 'my-bullet-active',
                     },
                     //解决网络加载图片而不能滑动 不出现指示器的问题
-                    observer:true,
-                    observeParents:true,
-                    observeSlideChildren:true,
+                    observer: true,
+                    observeParents: true,
+                    observeSlideChildren: true,
                 });
 
             }
         })
-        .catch(function(err){
+        .catch(function (err) {
             console.log(err);
         });
 
     /*创建首页导航*/
     $(".nav i").text(new Date().getDate());
+
+    /*创建推荐歌单*/
+    //..超出两行显示 省略号(...)
+
+    $(".recommend-title").forEach(function(ele,index){
+        $clamp(ele, {clamp: 2})
+    });
 });

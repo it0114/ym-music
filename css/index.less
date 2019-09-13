@@ -6,7 +6,7 @@
   padding: 0 20/100rem;
   box-sizing: border-box;
   position: fixed;
-  background: skyblue;
+  background: #fff;
   top: 0;
   left: 0;
   z-index: 2;
@@ -327,27 +327,27 @@
               font-weight: bold;
               color: #fd271b;
               font-style: normal;
-              padding-bottom: 10/100rem ;
+              padding-bottom: 10/100rem;
             }
           }
         }
       }
     }
-    .recommend{
+    .recommend {
       border-top: 1px solid #ccc;
       width: 100%;
-      .recommend-top{
+      .recommend-top {
         width: 100%;
         height: 120 /100rem;
         display: flex;
         justify-content: space-between;
-        h3{
+        h3 {
           font-size: 34 /100rem;
           font-weight: bold;
           color: #333;
           line-height: 120 /100rem;
         }
-        span{
+        span {
           font-size: 26 /100rem;
           font-weight: bold;
           padding: 15/100rem 20/100rem;
@@ -357,6 +357,47 @@
           border: 1px solid #ccc;
           text-align: center;
           margin-top: 27 /100rem;
+        }
+      }
+      .recommend-bottom {
+        width: 100%;
+        ul {
+          display: flex;
+          justify-content: space-between;
+          flex-wrap: wrap;
+          li {
+            margin-bottom: 40 / 100rem;
+            div {
+              width: 216 / 100rem;
+              height: 216 / 100rem;
+              border-radius: 15 /100rem;
+              position: relative;
+              overflow: hidden;
+              p {
+                position: absolute;
+                top: 10/100rem;
+                right: 10/100rem;
+                color: #fff;
+                img {
+                  vertical-align: top;
+                  width: 26 / 100rem;
+                  position: relative;
+                  top: 6/100rem;
+                }
+                span {
+                  font-size: 26 /100rem;
+
+                }
+              }
+            }
+            & > p {
+              width: 216/100rem;
+              margin-top: 15 /100rem;
+              font-size: 26 /100rem;
+              font-weight: bold;
+              color: #333;
+            }
+          }
         }
       }
     }
