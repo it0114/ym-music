@@ -202,9 +202,9 @@ $(function () {
     /*创建新歌新碟*/
 
     HomeApis.getHomeAlbum()
-        .then(function(data){
-            if(data.code === 200){
-                console.log(data);
+        .then(function (data) {
+            if (data.code === 200) {
+                // console.log(data);
                 let html = template('albumItem', data);
                 $('.album-bottom').html(html);
                 // iScroll重新刷新方法
@@ -215,11 +215,28 @@ $(function () {
                 });
             }
         })
-        .catch(function(err){
+        .catch(function (err) {
             console.log(err);
         });
 
-
+    //创建mv
+    HomeApis.getHomeMv()
+        .then(function (data) {
+            if (data.code === 200) {
+                console.log(data);
+                let html = template('mvItem', data);
+                $('.mv-bottom').html(html);
+                // iScroll重新刷新方法
+                myScroll.refresh();
+                //处理文字显示
+                $(".mv-title").forEach(function (ele, index) {
+                    $clamp(ele, {clamp: 1})
+                });
+            }
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
 
 
 });

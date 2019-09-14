@@ -63,6 +63,10 @@
         static getHomeAlbum() {
             return YMHttp.get("/top/album", {offset: 0, limit: 6});
         }
+        //MV数据
+        static getHomeMv() {
+            return YMHttp.get("/personalized/mv");
+        }
 
     }
 
