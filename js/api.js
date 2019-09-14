@@ -63,10 +63,12 @@
         static getHomeAlbum() {
             return YMHttp.get("/top/album", {offset: 0, limit: 6});
         }
+
         //MV数据
         static getHomeMv() {
             return YMHttp.get("/personalized/mv");
         }
+
         //dj数据
         static getHomeDj() {
             return YMHttp.get("/personalized/djprogram");
@@ -74,6 +76,7 @@
 
     }
 
+    //推送到给window
     window.YMHttp = YMHttp;
     window.HomeApis = HomeApis;
 })();

@@ -37,7 +37,6 @@ $(function () {
         let currentName = pageArray[$(this).index()];
         $(".header").removeClass().addClass("header " + currentName);
     });
-
     /*处理公共的内容区域*/
     // 1. 获取SVG路径的长度
     let length = $("#refreshLogo")[0].getTotalLength();
@@ -152,112 +151,12 @@ $(function () {
                     observeParents: true,
                     observeSlideChildren: true,
                 });
-
             }
         })
         .catch(function (err) {
             console.log(err);
         });
-
     /*创建首页导航*/
     $(".nav i").text(new Date().getDate());
-
-    /*创建推荐歌单*/
-    HomeApis.getHomeRecommend()
-        .then(function (data) {
-            if (data.code === 200) {
-                let html = template('recommendItem', data);
-                $('.recommend-bottom').html(html);
-                // iScroll重新刷新方法
-                myScroll.refresh();
-                //如果创建成功 ,
-                //..超出两行显示 省略号(...)
-                $(".recommend-title").forEach(function (ele, index) {
-                    $clamp(ele, {clamp: 2})
-                });
-            }
-        })
-        .catch(function (err) {
-            console.log(err);
-        });
-
-    /*创建独家放送*/
-    HomeApis.getHomeExclusive()
-        .then(function (data) {
-            if (data.code === 200) {
-                // console.log(data);
-                let html = template('exclusiveItem', data);
-                $('.exclusive-bottom').html(html);
-                // iScroll重新刷新方法
-                myScroll.refresh();
-                //处理文字显示
-                $(".exclusive-title").forEach(function (ele, index) {
-                    $clamp(ele, {clamp: 2})
-                });
-            }
-        })
-        .catch(function (err) {
-            console.log(err);
-        });
-    /*创建新歌新碟*/
-    HomeApis.getHomeAlbum()
-        .then(function (data) {
-            if (data.code === 200) {
-                // console.log(data);
-                let html = template('albumItem', data);
-                $('.album-bottom').html(html);
-                // iScroll重新刷新方法
-                myScroll.refresh();
-                //处理文字显示
-                $(".album-title").forEach(function (ele, index) {
-                    $clamp(ele, {clamp: 1})
-                });
-            }
-        })
-        .catch(function (err) {
-            console.log(err);
-        });
-
-    //创建mv
-    HomeApis.getHomeMv()
-        .then(function (data) {
-            if (data.code === 200) {
-                // console.log(data);
-                let html = template('mvItem', data);
-                $('.mv-bottom').html(html);
-                // iScroll重新刷新方法
-                myScroll.refresh();
-                //处理文字显示
-                $(".mv-title").forEach(function (ele, index) {
-                    $clamp(ele, {clamp: 1})
-                });
-            }
-        })
-        .catch(function (err) {
-            console.log(err);
-        });
-
-    //创建mv
-    HomeApis.getHomeDj()
-        .then(function (data) {
-            if (data.code === 200) {
-                console.log(data);
-                let html = template('djItem', data);
-                $('.dj-bottom').html(html);
-                // iScroll重新刷新方法
-                myScroll.refresh();
-                //处理文字显示
-                $(".dj-title").forEach(function (ele, index) {
-                    $clamp(ele, {clamp: 2})
-                });
-                $(".dj-img-text").forEach(function (ele, index) {
-                    $clamp(ele, {clamp: 1})
-                });
-            }
-        })
-        .catch(function (err) {
-            console.log(err);
-        });
-
 
 });

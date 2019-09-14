@@ -104,46 +104,6 @@
                 </li>
             </ul>
         </div>
-        <!--推荐歌单-->
-        <div class="recommend">
-            <div class="recommend-top">
-                <h3>推荐歌单</h3>
-                <span>歌单广场</span>
-            </div>
-            <div class="recommend-bottom"></div>
-        </div>
-        <!--独家放送-->
-        <div class="exclusive">
-            <div class="exclusive-top">
-                <h3>独家放送</h3>
-                <span>独家剧场</span>
-            </div>
-            <div class="exclusive-bottom"></div>
-        </div>
-        <!--新碟新歌-->
-        <div class="album">
-            <div class="album-top">
-                <h3>新碟新歌</h3>
-                <span>更多新碟</span>
-            </div>
-            <div class="album-bottom"></div>
-        </div>
-        <!--MV-->
-        <div class="mv">
-            <div class="mv-top">
-                <h3>推荐MV</h3>
-                <span>更多MV</span>
-            </div>
-            <div class="mv-bottom"> </div>
-        </div>
-        <!--dj-->
-        <div class="dj">
-            <div class="dj-top">
-                <h3>主播电台</h3>
-                <span>更多主播</span>
-            </div>
-            <div class="dj-bottom"></div>
-        </div>
         <!--下拉加载更多-->
         <div class="pull-up">
             <p>
@@ -180,7 +140,6 @@
     </ul>
 </div>
 <!--尾部 End-->
-
 <!--获取首页轮播图数据-->
 <script id="bannerSlide" type="text/html">
     <% for(let i = 0; i < banners.length; i++ ) {%>
@@ -286,8 +245,6 @@
     </ul>
 </script>
 <!--获取首页dj数据-->
-
-
 <script id="djItem" type="text/html">
     <ul>
         <% for(let i = 0; i < result.length; i++ ) {%>
@@ -304,14 +261,7 @@
         <% } %>
     </ul>
 </script>
-
-
-
-
-
-
 </body>
-
 <script src="js/less.js"></script>
 <script src="js/zepto.js"></script>
 <script src="js/fx.js"></script>
