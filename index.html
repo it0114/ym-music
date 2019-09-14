@@ -120,6 +120,14 @@
             </div>
             <div class="exclusive-bottom"></div>
         </div>
+        <!--新碟新歌-->
+        <div class="album">
+            <div class="album-top">
+                <h3>新碟新歌</h3>
+                <span>更多新碟</span>
+            </div>
+            <div class="album-bottom"></div>
+        </div>
         <!--下拉加载更多-->
         <div class="pull-up">
             <p>
@@ -222,6 +230,23 @@
                 <img src="<%=result[i].sPicUrl%>" class="fluid-img">
             </div>
             <p class="exclusive-title"><%=result[i].name%></p>
+        </li>
+        <% } %>
+    </ul>
+
+</script>
+
+<!--获取首页新歌新碟数据-->
+<script id="albumItem" type="text/html">
+
+    <ul>
+        <% for(let i = 0; i < albums.length; i++ ) {%>
+        <li>
+            <div>
+                <img src="<%=albums[i].blurPicUrl%>" class="fluid-img">
+            </div>
+            <p class="album-title"><%=albums[i].name%></p>
+            <p class="album-singer"><%=albums[i].artists[0].name%></p>
         </li>
         <% } %>
     </ul>

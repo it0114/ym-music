@@ -104,7 +104,7 @@ $(function () {
                 isPullDowm = false;
                 isRefresh = false;
                 myScroll.minScrollY = 0;
-                myScroll.scrollTo(0, 0)
+                myScroll.scrollTo(0, 0);
                 $("#refreshLogo").css({"stroke-dashoffset": length});
             }, 1000)
         }
@@ -183,9 +183,9 @@ $(function () {
 
     /*创建独家放送*/
     HomeApis.getHomeExclusive()
-        .then(function(data){
-            if(data.code === 200){
-                console.log(data);
+        .then(function (data) {
+            if (data.code === 200) {
+                // console.log(data);
                 let html = template('exclusiveItem', data);
                 $('.exclusive-bottom').html(html);
                 // iScroll重新刷新方法
@@ -196,9 +196,30 @@ $(function () {
                 });
             }
         })
+        .catch(function (err) {
+            console.log(err);
+        });
+    /*创建新歌新碟*/
+
+    HomeApis.getHomeAlbum()
+        .then(function(data){
+            if(data.code === 200){
+                console.log(data);
+                let html = template('albumItem', data);
+                $('.album-bottom').html(html);
+                // iScroll重新刷新方法
+                myScroll.refresh();
+                //处理文字显示
+                $(".album-title").forEach(function (ele, index) {
+                    $clamp(ele, {clamp: 1})
+                });
+            }
+        })
         .catch(function(err){
             console.log(err);
         });
+
+
 
 
 });
