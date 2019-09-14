@@ -128,7 +128,7 @@
             </div>
             <div class="album-bottom"></div>
         </div>
-        <!--推荐歌单-->
+        <!--MV-->
         <div class="mv">
             <div class="mv-top">
                 <h3>推荐MV</h3>
@@ -136,7 +136,14 @@
             </div>
             <div class="mv-bottom"> </div>
         </div>
-
+        <!--dj-->
+        <div class="dj">
+            <div class="dj-top">
+                <h3>主播电台</h3>
+                <span>更多主播</span>
+            </div>
+            <div class="dj-bottom"></div>
+        </div>
         <!--下拉加载更多-->
         <div class="pull-up">
             <p>
@@ -260,8 +267,7 @@
     </ul>
 
 </script>
-
-<!--获取首页新歌新碟数据-->
+<!--获取首页MV数据-->
 <script id="mvItem" type="text/html">
     <ul>
         <% for(let i = 0; i < result.length; i++ ) {%>
@@ -279,6 +285,30 @@
         <% } %>
     </ul>
 </script>
+<!--获取首页dj数据-->
+
+
+<script id="djItem" type="text/html">
+    <ul>
+        <% for(let i = 0; i < result.length; i++ ) {%>
+        <li>
+            <div>
+                <img src="<%=result[i].picUrl%>" class="fluid-img">
+                <p>
+                    <span class="dj-img-text"><%=result[i].name%></span>
+                    <img src="images/home-small-dj.png">
+                </p>
+            </div>
+            <p class="dj-title"><%=result[i].copywriter%></p>
+        </li>
+        <% } %>
+    </ul>
+</script>
+
+
+
+
+
 
 </body>
 

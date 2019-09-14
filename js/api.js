@@ -67,6 +67,10 @@
         static getHomeMv() {
             return YMHttp.get("/personalized/mv");
         }
+        //dj数据
+        static getHomeDj() {
+            return YMHttp.get("/personalized/djprogram");
+        }
 
     }
 
