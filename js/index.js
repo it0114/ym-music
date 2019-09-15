@@ -158,5 +158,168 @@ $(function () {
         });
     /*创建首页导航*/
     $(".nav i").text(new Date().getDate());
+    /*创建推荐歌单*/
+    HomeApis.getHomeRecommend()
+        .then(function (data) {
+            if (data.code === 200) {
+                data.title = "推荐歌单";
+                data.subTitle = "歌单广场";
+                //创建宽度
+                data.result.forEach(function (obj) {
+                    obj.width = 216 / 100;
+                    //处理播放量
+                    obj.playCount = formatNum(obj.playCount);
+                });
+                let html = template('category', data);
+                $('.recommend').html(html);
+                //如果创建成功 ,
+                //..超出两行显示 省略号(...)
+                $(".recommend .category-title").forEach(function (ele, index) {
+                    $clamp(ele, {clamp: 2})
+                });
+                // iScroll重新刷新方法
+                myScroll.refresh();
+            }
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
+    /*创建独家放送*/
+    HomeApis.getHomeExclusive()
+        .then(function (data) {
+            if (data.code === 200) {
+                data.title = "独家放送";
+                data.subTitle = "独家剧场";
+                //创建宽度
+                data.result.forEach(function (obj, index) {
+                    obj.width = 334 / 100;
+                    if (index === 2) {
+                        obj.width = 690 / 100;
+                    }
+                });
+                let html = template('category', data);
+                $('.exclusive').html(html);
+                //如果创建成功 ,
+                //..超出两行显示 省略号(...)
+                $(".exclusive .category-title").forEach(function (ele, index) {
+                    $clamp(ele, {clamp: 2})
+                });
+                // iScroll重新刷新方法
+                myScroll.refresh();
+            }
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
+    /*创建新歌新碟*/
+    HomeApis.getHomeAlbum()
+        .then(function (data) {
+            if (data.code === 200) {
+                data.title = "新碟新歌";
+                data.subTitle = "更多新歌";
+                data.result = data["albums"];
+                data.result.forEach(function (obj) {
+                    obj.artistName = obj.artist.name;
+                    //创建宽度
+                    obj.width = 216 / 100;
+                });
+                let html = template('category', data);
+                $('.album').html(html);
+                //如果创建成功 ,
+                //..超出两行显示 省略号(...)
+                $(".album .category-title").forEach(function (ele, index) {
+                    $clamp(ele, {clamp: 1})
+                });
+                $(".album .category-img-text").forEach(function (ele, index) {
+                    $clamp(ele, {clamp: 1})
+                });
+                // iScroll重新刷新方法
+                myScroll.refresh();
+            }
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
+    //创建mv
+    HomeApis.getHomeMv()
+        .then(function (data) {
+            if (data.code === 200) {
+                data.title = "推荐MV";
+                data.subTitle = "更多MV";
+                data.result.forEach(function (obj, index) {
+                    obj.width = 334 / 100;
+                });
+                let html = template('category', data);
+                $('.mv').html(html);
+                //如果创建成功 ,
+                //..超出两行显示 省略号(...)
+                $(".mv .category-title").forEach(function (ele, index) {
+                    $clamp(ele, {clamp: 1})
+                });
+                $(".mv .category-singer").forEach(function (ele, index) {
+                    $clamp(ele, {clamp: 1})
+                });
+                // iScroll重新刷新方法
+                myScroll.refresh();
+            }
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
+    //创建dj
+    HomeApis.getHomeDj()
+        .then(function (data) {
+            if (data.code === 200) {
+                data.title = "主播电台";
+                data.subTitle = "更多主播";
+                data.result.forEach(function (obj, index) {
+                    obj.width = 216 / 100;
+                });
+                let html = template('category', data);
+                $('.dj').html(html);
+                //如果创建成功 ,
+                //..超出两行显示 省略号(...)
+                $(".dj .category-title").forEach(function (ele, index) {
+                    $clamp(ele, {clamp: 1})
+                });
+                $(".dj .category-img-text").forEach(function (ele, index) {
+                    $clamp(ele, {clamp: 1})
+                });
+                // iScroll重新刷新方法
+                myScroll.refresh();
+            }
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
 
+    //处理播放量
+    function formatNum(num) {
+        //处理播放量
+        //处理 亿
+        let res = 0;
+        if (num / 100000000 > 1) {
+            let temp = num / 100000000 + "";
+            //判断整除后的数是否包含 .
+            if (temp.indexOf(".") === -1) {
+                res = (num / 100000000) + "亿";
+            } else {
+                //如果不包含 . ,那么则保留一位小数
+                res = (num / 100000000).toFixed(1) + "亿";
+            }
+            //处理 万
+        } else if (num / 10000 > 1) {
+            let temp = num / 10000 + "";
+            //判断整除后的数是否包含 .
+            if (temp.indexOf(".") === -1) {
+                res = (num / 10000) + "万";
+            } else {
+                //如果不包含 . ,那么则保留一位小数
+                res = (num / 10000).toFixed(1) + "万";
+            }
+        } else {
+            res = num;
+        }
+        return res;
+    }
 });

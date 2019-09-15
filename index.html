@@ -104,6 +104,17 @@
                 </li>
             </ul>
         </div>
+        <!--推荐歌单-->
+        <div class="recommend"></div>
+        <!--独家放送-->
+        <div class="exclusive">
+        </div>
+        <!--新碟新歌-->
+        <div class="album"></div>
+        <!--MV-->
+        <div class="mv"></div>
+        <!--dj-->
+        <div class="dj"></div>
         <!--下拉加载更多-->
         <div class="pull-up">
             <p>
@@ -149,118 +160,44 @@
     </div>
     <% } %>
 </script>
-<!--获取首页推荐歌单数据-->
-<script id="recommendItem" type="text/html">
-    <ul>
-        <% for(let i = 0; i < 6; i++ ) {%>
-        <li id="<%=result[i].id%>" title="<%=result[i].copywriter%>">
-            <div>
-                <img src="<%=result[i].picUrl%>" class="fluid-img">
-                <p>
-                    <img src="images/home-small-play.png">
-                    <%
-                    //处理播放量
-                    //处理 亿
-                    let num = result[i].playCount;
-                    let res = 0;
-                    if (num / 100000000 > 1) {
-                    let temp = num / 100000000 + "";
-                    //判断整除后的数是否包含 .
-                    if (temp.indexOf(".") === -1) {
-                    res = (num / 100000000) + "亿";
-                    } else {
-                    //如果不包含 . ,那么则保留一位小数
-                    res = (num / 100000000).toFixed(1) + "亿";
-                    }
-                    //处理 万
-                    } else if (num / 10000 > 1) {
-                    let temp = num / 10000 + "";
-                    //判断整除后的数是否包含 .
-                    if (temp.indexOf(".") === -1) {
-                    res = (num / 10000) + "万";
-                    } else {
-                    //如果不包含 . ,那么则保留一位小数
-                    res = (num / 10000).toFixed(1) + "万";
-                    }
-                    } else {
-                    res = num;
-                    }
-                    %>
-                    <span><%=res%></span>
-                </p>
-            </div>
-            <p class="recommend-title"><%=result[i].name%></p>
-        </li>
-        <% } %>
-    </ul>
+<!--获取首页所有的数据-->
+<script id="category" type="text/html">
+    <div class="category">
+        <div class="category-top">
+            <h3><%=title%></h3>
+            <span><%=subTitle%></span>
+        </div>
+        <div class="category-bottom">
+            <ul>
+                <% for(let i = 0; i < result.length; i++ ) {%>
+                <li style="width:<%=result[i].width%>rem">
+                    <div>
+                        <img src="<%=result[i].picUrl%>" class="fluid-img">
+                        <% if(title === "推荐歌单") {%>
+                        <p class="p1">
+                            <img src="images/home-small-play.png">
+                            <span><%=result[i].playCount%></span>
+                        </p>
+                        <% } else if(title === "独家放送") {%>
+                        <p class="p2">
+                            <img src="images/home-small-exclusive.png">
+                        </p>
+                        <% } else if(title === "主播电台") {%>
+                        <p class="p3">
+                            <span class="category-img-text"><%=result[i].name%></span>
+                            <img src="images/home-small-dj.png">
+                        </p>
+                        <% } %>
+                    </div>
+                    <p class="category-title"><%=result[i].name%></p>
+                    <p class="category-singer"><%=result[i].artistName%></p>
+                </li>
+                <% }%>
+            </ul>
+        </div>
+    </div>
 </script>
-<!--获取首页独家放送数据-->
-<script id="exclusiveItem" type="text/html">
 
-    <ul>
-        <% for(let i = 0; i < result.length; i++ ) {%>
-        <li>
-            <div>
-                <i></i>
-                <img src="<%=result[i].sPicUrl%>" class="fluid-img">
-            </div>
-            <p class="exclusive-title"><%=result[i].name%></p>
-        </li>
-        <% } %>
-    </ul>
-
-</script>
-<!--获取首页新歌新碟数据-->
-<script id="albumItem" type="text/html">
-
-    <ul>
-        <% for(let i = 0; i < albums.length; i++ ) {%>
-        <li>
-            <div>
-                <img src="<%=albums[i].blurPicUrl%>" class="fluid-img">
-            </div>
-            <p class="album-title"><%=albums[i].name%></p>
-            <p class="album-singer"><%=albums[i].artists[0].name%></p>
-        </li>
-        <% } %>
-    </ul>
-
-</script>
-<!--获取首页MV数据-->
-<script id="mvItem" type="text/html">
-    <ul>
-        <% for(let i = 0; i < result.length; i++ ) {%>
-        <li>
-            <div>
-                <img src="<%=result[i].picUrl%>" class="fluid-img">
-                <p>
-                    <img src="images/home-small-video.png">
-                    <span><%=result[i].playCount%></span>
-                </p>
-            </div>
-            <p class="mv-title"><%=result[i].name%></p>
-            <p class="mv-singer"><%=result[i].artistName%></p>
-        </li>
-        <% } %>
-    </ul>
-</script>
-<!--获取首页dj数据-->
-<script id="djItem" type="text/html">
-    <ul>
-        <% for(let i = 0; i < result.length; i++ ) {%>
-        <li>
-            <div>
-                <img src="<%=result[i].picUrl%>" class="fluid-img">
-                <p>
-                    <span class="dj-img-text"><%=result[i].name%></span>
-                    <img src="images/home-small-dj.png">
-                </p>
-            </div>
-            <p class="dj-title"><%=result[i].copywriter%></p>
-        </li>
-        <% } %>
-    </ul>
-</script>
 </body>
 <script src="js/less.js"></script>
 <script src="js/zepto.js"></script>
