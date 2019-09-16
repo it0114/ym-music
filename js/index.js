@@ -3,10 +3,104 @@ $(function () {
     //监听input的 focus事件
     $(".header-center-box>input").focus(function () {
         $(".header").addClass("active");
+        //显示搜索页面
+        $(".header-container").show();
+        //重新刷新 iScroll
+        searchScroll.refresh();
+        //让软键盘不要重复弹
+        setTimeout(function(){
+            $(".header-center-box>input").blur();
+        },5000)
     });
     $(".header-cancle").click(function () {
         $(".header").removeClass("active");
+        //隐藏搜索页面
+        $(".header-container").hide();
     });
+    //1 .删除广告
+    $(".search-ad>span").click(function () {
+        $(".search-ad").remove();
+    });
+
+    let historyArray = getHistory();
+
+    //封装获取搜素历史
+    function getHistory() {
+        let historyArray = localStorage.getItem("history");
+        //判断是否有数据
+        if (!historyArray) {
+            historyArray = [];
+        } else {
+            // 如果获取到有数据
+            historyArray = JSON.parse(historyArray);
+        }
+        return historyArray
+    }
+
+    // 2. 进来之后获取数据 ,判断是否有数据
+    if (historyArray.length === 0) {
+        $(".search-history").hide();
+    } else {
+        $(".search-history").show();
+        //搜索按钮垃圾桶
+        $(".history-top>img").click(function () {
+            localStorage.removeItem("history");
+        });
+        //动态创建数据
+        historyArray.forEach(function (item) {
+            let oLi = $("<li>" + item + "</li>");
+            $(".history-bottom").append(oLi);
+        })
+    }
+
+    //3. 处理热搜榜
+    HomeApis.getHomeHotDetail()
+        .then(function (data) {
+            if (data.code === 200) {
+                console.log(data);
+                let html = template('hotDetail', data);
+                $('.hot-bottom').html(html);
+                //重新刷新 iScroll
+                searchScroll.refresh()
+            }
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
+    //4. 创建 IScroll
+    let searchScroll = new IScroll('.header-container', {
+        mouseWheel: false,
+        scrollbars: false,
+        /* 需要使用iscrol-probe.js才能生效probeType
+            1. 滚动不繁忙的时候触发
+            2. 滚动时每隔一定时间触发
+            3. 每滚动一像素触发
+        */
+        probeType: 3,
+        //让iscroll不阻止其他事件
+        preventDefault: false,
+        preventDefaultException: { tagName: /^(INPUT|TEXTAREA|BUTTON|SELECT|A)$/ },
+    });
+
+    //监听 失去焦点
+    $(".header-center-box>input").blur(function () {
+        // console.log(this.value);
+        //判断用户是否输入内容
+        if (this.value.length === 0) {
+            return;
+        } else {
+            //如果不等于0 ,那么则先获取数据
+            //插入数据到第一条
+            historyArray.unshift(this.value);
+            //清空当前用户框的数据
+            this.value = "";
+            //把数据存到本地
+            //因为localStorage只能存字符串, 所以得转为字符串再存
+            localStorage.setItem("history", JSON.stringify(historyArray));
+        }
+    });
+
+
     //切换 friend 界面头部背景
     $(".header-switch>span").click(function () {
         // console.log(this.offsetLeft);
@@ -60,7 +154,6 @@ $(function () {
     let maxOffsetY = myScroll.maxScrollY - bottomHergit;
     //是否允许重复刷新
     let isPullDowm = false;
-    let isPullUp = false;
     //是否允许重复刷新
     let isRefresh = false;
     myScroll.on("scroll", function () {
@@ -73,13 +166,7 @@ $(function () {
                 this.minScrollY = 170;
                 isPullDowm = true;
             }
-        } else if (this.y <= maxOffsetY) {    //上拉加载更多
-            console.log("能够看到上拉加载更多");
-            $(".pull-up>p>span").text("松手加载更多...");
-            this.maxScrollY = maxOffsetY;
-            isPullUp = true;
         }
-        // console.log(this.y, this.maxScrollY);
     });
     myScroll.on("scrollEnd", function () {
         //下拉刷新
@@ -87,13 +174,6 @@ $(function () {
             isRefresh = true;
             console.log("去网络刷新数据");
             refreshDown();
-        }
-        //上拉加载
-        else if (isPullUp && !isRefresh) {
-            $(".pull-up>p>span").text("正在加载中...");
-            isRefresh = true;
-            console.log("去网络刷新数据");
-            refreshUp();
         }
 
         //模拟下拉刷新
@@ -105,18 +185,6 @@ $(function () {
                 myScroll.minScrollY = 0;
                 myScroll.scrollTo(0, 0);
                 $("#refreshLogo").css({"stroke-dashoffset": length});
-            }, 1000)
-        }
-
-        //模拟上拉加载
-        function refreshUp() {
-            setTimeout(function () {
-                console.log("数据刷新完毕");
-                isPullUp = false;
-                isRefresh = false;
-                myScroll.maxScrollY = maxOffsetY + bottomHergit;
-                myScroll.scrollTo(0, myScroll.maxScrollY);
-                $(".pull-up>p>span").text("下拉加载更多...");
             }, 1000)
         }
     });

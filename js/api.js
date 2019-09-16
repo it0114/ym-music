@@ -73,6 +73,10 @@
         static getHomeDj() {
             return YMHttp.get("/personalized/djprogram");
         }
+        //搜索框数据
+        static getHomeHotDetail(){
+            return YMHttp.get("/search/hot/detail");
+        }
 
     }
 
