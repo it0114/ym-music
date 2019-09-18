@@ -10,12 +10,12 @@
     <meta name="keywords"
           content="网易云音乐，音乐，播放器，网易，下载，播放，DJ，免费，明星，精选，歌单，识别音乐，收藏，分享音乐，音乐互动，高音质，320K，音乐社交，官网，移动站，music.163.com">
     <meta name="description" content="网易云音乐是一款专注于发现与分享的音乐产品，依托专业音乐人、DJ、好友推荐及社交功能，为用户打造全新的音乐生活。">
-    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="shortcut icon" href="../favicon.ico">
     <!--苹果私有属性-->
-    <link rel="apple-touch-icon" href="apple-touch-icon.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon114.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="apple-touch-icon152.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon180.png">
+    <link rel="apple-touch-icon" href="./../apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="./../apple-touch-icon114.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="./../apple-touch-icon152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="./../apple-touch-icon180.png">
     <!--px转rem适配方案-->
     <script>
         let scale = 1.0 / window.devicePixelRatio;
@@ -23,74 +23,22 @@
         document.write(text);
         document.documentElement.style.fontSize = window.innerWidth / 7.5 + "px";
     </script>
-    <link rel="stylesheet" href="./css/reset.css">
-    <link rel="stylesheet" href="./css/swiper.css">
+    <link rel="stylesheet" href="./../css/reset.css">
+    <link rel="stylesheet" href="./../css/swiper.css">
     <script>
-        document.write('<link href="./css/index.less?v=' + new Date().getTime() + '" rel="stylesheet" type="text/less"/>');
+        document.write('<link href="css/index.less?v="'+ new Date().getTime() + ' rel="stylesheet" type="text/less"/>');
     </script>
 </head>
 <body>
-<!--双飞翼布局
-1.一个容器中放三个子元素
-2. 在中间的元素中再放一个元素
-3. 设置两边的固定尺寸, 设置中间的宽度为100%
-4. 设置中间元素里面的盒子的margin为两边的宽度
-5. 让三个元素都往同一方向浮动
-6. 设置左边盒子的margin-left:-100%;
-7. 设置右边盒子的margin-left:-自身宽度;
--->
 <!--头部 Start-->
-<div class="header">
-    <!--头部-->
-    <div class="header-default">
-        <div class="header-center">
-            <div class="header-center-box">
-                <img src="images/topbar-it666-search.png" alt="...">
-                <input type="text" placeholder="心如止水 最近很火哦~">
-                <span class="header-title">我的音乐</span>
-                <div class="header-switch">
-                    <i></i>
-                    <span class="active">动态</span>
-                    <span>附近</span>
-                </div>
-            </div>
-        </div>
-        <div class="header-left"></div>
-        <div class="header-cancle">
-            <a href="#">取消</a>
-        </div>
-        <div class="header-right"></div>
-    </div>
-    <!--内容-->
-    <div class="header-container">
-        <div class="header-wrapper">
-            <div class="search-ad">
-                <img src="images/search-banner.gif" alt="广告位" class="fluid-img">
-                <span>X</span>
-            </div>
-            <div class="search-history">
-                <div class="history-top">
-                    <h6>搜索历史</h6>
-                    <img src="images/search-it666-delete.png" alt="删除历史">
-                </div>
-                <ul class="history-bottom"></ul>
-            </div>
-            <div class="search-hot">
-                <div class="hot-top">
-                    <h6>热搜榜</h6>
-                </div>
-                <ul class="hot-bottom"></ul>
-            </div>
-        </div>
-    </div>
-</div>
+<div class="header"></div>
 <!--头部 End-->
 <!--内容 Start-->
 <div class="main">
     <div class="main-in">
         <!--下拉刷新-->
         <div class="pull-down">
-            <img src="images/pull-down.png">
+            <img src="../images/pull-down.png">
             <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"width="60px" height="60px" viewBox="279.747 366.016 60 60" enable-background="new 279.747 366.016 60 60" xml:space="preserve">
 <path id="refreshLogo" fill="none" stroke="#000000" stroke-width="4" stroke-linecap="round" stroke-miterlimit="10" d="M301.144,374.58c-16.549,5.334-25.163,23.41-15.075,37.437c8.615,12.051,26.864,15.606,40.692,8.001c10.995-6.025,14.282-18.768,7.368-28.349c-5.555-7.705-17.229-9.977-26.07-5.137c-7.027,3.853-8.614,10.767-5.44,16.298c3.06,5.137,11.221,5.631,15.302,2.667c5.44-4.05,4.193-10.568,1.474-15.31c-14.282-25.09,7.254-24.694,9.975-18.966"/>
 </svg>
@@ -106,25 +54,25 @@
             <ul>
                 <li>
                     <p>
-                        <img src="images/home-it666-rl.png">
+                        <img src="../images/home-it666-rl.png">
                         <i>23</i>
                     </p>
                     <span>每日推荐</span>
                 </li>
                 <li>
-                    <img src="images/home-it666-gd.png">
+                    <img src="../images/home-it666-gd.png">
                     <span>歌单</span>
                 </li>
                 <li>
-                    <img src="images/home-it666-phb.png">
+                    <img src="../images/home-it666-phb.png">
                     <span>排行榜</span>
                 </li>
                 <li>
-                    <img src="images/home-it666-dt.png">
+                    <img src="../images/home-it666-dt.png">
                     <span>电台</span>
                 </li>
                 <li>
-                    <img src="images/home-it666-zb.png">
+                    <img src="../images/home-it666-zb.png">
                     <span>直播</span>
                 </li>
             </ul>
@@ -143,39 +91,20 @@
         <!--下拉加载更多-->
         <div class="pull-up">
             <p>
-                <img src="images/pull-up.gif" alt="...">
+                <img src="../images/pull-up.gif" alt="...">
                 <span>上拉加载更多...</span>
             </p>
         </div>
     </div>
 </div>
 <!--内容 End-->
+
 <!--尾部 Start-->
-<div class="footer">
-    <ul>
-        <li class="active">
-            <img src="images/toolbar-it666-discovery-selected.png">
-            <span>发现</span>
-        </li>
-        <li>
-            <img src="images/toolbar-it666-video-normal.png">
-            <span>视频</span>
-        </li>
-        <li>
-            <img src="images/toolbar-it666-me-normal.png">
-            <span>我的</span>
-        </li>
-        <li>
-            <img src="images/toolbar-it666-friend-normal.png">
-            <span>朋友</span>
-        </li>
-        <li>
-            <img src="images/toolbar-it666-account-normal.png">
-            <span>账号</span>
-        </li>
-    </ul>
-</div>
+<div class="footer"></div>
 <!--尾部 End-->
+
+
+
 <!--获取首页轮播图数据-->
 <script id="bannerSlide" type="text/html">
     <% for(let i = 0; i < banners.length; i++ ) {%>
@@ -200,17 +129,17 @@
                         <img src="<%=result[i].picUrl%>" class="fluid-img">
                         <% if(title === "推荐歌单") {%>
                         <p class="p1">
-                            <img src="images/home-small-play.png">
+                            <img src="../images/home-small-play.png">
                             <span><%=result[i].playCount%></span>
                         </p>
                         <% } else if(title === "独家放送") {%>
                         <p class="p2">
-                            <img src="images/home-small-exclusive.png">
+                            <img src="../images/home-small-exclusive.png">
                         </p>
                         <% } else if(title === "主播电台") {%>
                         <p class="p3">
                             <span class="category-img-text"><%=result[i].name%></span>
-                            <img src="images/home-small-dj.png">
+                            <img src="../images/home-small-dj.png">
                         </p>
                         <% } %>
                     </div>
@@ -223,35 +152,20 @@
     </div>
 </script>
 
-<!--搜索框热度数据-->
-<script id="hotDetail" type="text/html">
-    <% for(let i = 0; i < data.length; i++ ) {%>
-    <li>
-        <span class="hot-left"><%=(i+1)%></span>
-        <div class="hot-right">
-            <p>
-                <strong><%=data[i].searchWord%></strong>
-                <span><%=data[i].score%></span>
-                <img src="<%=data[i].iconUrl%>">
-            </p>
-            <p><%=data[i].content%></p>
-        </div>
-    </li>
-    <%}%>
-</script>
 
 </body>
-<script src="js/less.js"></script>
-<script src="js/zepto.js"></script>
-<script src="js/fx.js"></script>
-<script src="js/fx_methods.js"></script>
-<script src="js/iscroll-probe.js"></script>
-<script src="js/swiper.js"></script>
-<script src="js/axios.js"></script>
-<script src="js/clamp.js"></script>
-<script src="js/template-web.js"></script>
+<script src="./../js/less.js"></script>
+<script src="./../js/zepto.js"></script>
+<script src="./../js/fx.js"></script>
+<script src="./../js/fx_methods.js"></script>
+<script src="./../js/iscroll-probe.js"></script>
+<script src="./../js/swiper.js"></script>
+<script src="./../js/axios.js"></script>
+<script src="./../js/clamp.js"></script>
+<script src="./../js/template-web.js"></script>
+<script src="./../js/tools.js"></script>
 <script>
-    document.write('<script src="js/api.js?v=' + new Date().getTime() + '"><\/script\>');
-    document.write('<script src="js/index.js?v=' + new Date().getTime() + '"><\/script\>');
+    document.write('<script src="../js/api.js?v="'+ new Date().getTime()+'><\/script\>');
+    document.write('<script src="js/index.js?v="'+ new Date().getTime()+'><\/script\>');
 </script>
 </html>

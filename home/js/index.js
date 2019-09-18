@@ -1,137 +1,23 @@
 $(function () {
-    /*切换头部状态*/
-    //监听input的 focus事件
-    $(".header-center-box>input").focus(function () {
-        $(".header").addClass("active");
-        //显示搜索页面
-        $(".header-container").show();
-        //重新刷新 iScroll
-        searchScroll.refresh();
-        //让软键盘不要重复弹
-        setTimeout(function(){
-            $(".header-center-box>input").blur();
-        },5000)
-    });
-    $(".header-cancle").click(function () {
-        $(".header").removeClass("active");
-        //隐藏搜索页面
-        $(".header-container").hide();
-    });
-    //1 .删除广告
-    $(".search-ad>span").click(function () {
-        $(".search-ad").remove();
+
+    /*处理公共的头部内容区域*/
+    $(".header").load("./../common/header.html",function(){
+        //当加载的内容被添加后 ,执行
+        let sc = document.createElement("script");
+        sc.src = "./../common/js/header.js";
+        document.body.appendChild(sc);
     });
 
-    let historyArray = getHistory();
-
-    //封装获取搜素历史
-    function getHistory() {
-        let historyArray = localStorage.getItem("history");
-        //判断是否有数据
-        if (!historyArray) {
-            historyArray = [];
-        } else {
-            // 如果获取到有数据
-            historyArray = JSON.parse(historyArray);
-        }
-        return historyArray
-    }
-
-    // 2. 进来之后获取数据 ,判断是否有数据
-    if (historyArray.length === 0) {
-        $(".search-history").hide();
-    } else {
-        $(".search-history").show();
-        //搜索按钮垃圾桶
-        $(".history-top>img").click(function () {
-            localStorage.removeItem("history");
-        });
-        //动态创建数据
-        historyArray.forEach(function (item) {
-            let oLi = $("<li>" + item + "</li>");
-            $(".history-bottom").append(oLi);
-        })
-    }
-
-    //3. 处理热搜榜
-    HomeApis.getHomeHotDetail()
-        .then(function (data) {
-            if (data.code === 200) {
-                console.log(data);
-                let html = template('hotDetail', data);
-                $('.hot-bottom').html(html);
-                //重新刷新 iScroll
-                searchScroll.refresh()
-            }
-        })
-        .catch(function (err) {
-            console.log(err);
-        });
-    //4. 创建 IScroll
-    let searchScroll = new IScroll('.header-container', {
-        mouseWheel: false,
-        scrollbars: false,
-        /* 需要使用iscrol-probe.js才能生效probeType
-            1. 滚动不繁忙的时候触发
-            2. 滚动时每隔一定时间触发
-            3. 每滚动一像素触发
-        */
-        probeType: 3,
-        //让iscroll不阻止其他事件
-        preventDefault: false,
-        preventDefaultException: { tagName: /^(INPUT|TEXTAREA|BUTTON|SELECT|A)$/ },
-    });
-
-    //监听 失去焦点
-    $(".header-center-box>input").blur(function () {
-        // console.log(this.value);
-        //判断用户是否输入内容
-        if (this.value.length === 0) {
-            return;
-        } else {
-            //如果不等于0 ,那么则先获取数据
-            //插入数据到第一条
-            historyArray.unshift(this.value);
-            //清空当前用户框的数据
-            this.value = "";
-            //把数据存到本地
-            //因为localStorage只能存字符串, 所以得转为字符串再存
-            localStorage.setItem("history", JSON.stringify(historyArray));
-        }
+    /*处理公共的底部内容区域*/
+    $(".footer").load("./../common/footer.html",function(){
+        //当加载的内容被添加后 ,执行
+        let sc = document.createElement("script");
+        sc.src = "./../common/js/footer.js";
+        document.body.appendChild(sc);
     });
 
 
-    //切换 friend 界面头部背景
-    $(".header-switch>span").click(function () {
-        // console.log(this.offsetLeft);
-        //添加动画
-        $(".header-switch>i").animate({
-            left: this.offsetLeft
-        }, 100);
-        $(this).addClass("active").siblings().removeClass("active");
-    });
-    //定义关联
-    let pageArray = ["home", "video", "me", "friend", "account"];
-    //底部导航
-    $(".footer>ul>li").click(function () {
-        $(this).addClass("active").siblings().removeClass("active");
-        // find 找到 下面的所有 img 元素, 并且使用 attr 改变它的src属性
-        // attr 是 设置或者返回选中的属性值  全称呼 :attribute
-        let url = $(this).find("img").attr("src");
-        //replace  第一个属性是查找 ,如果找到就返回
-        //replace  第二个属性是替换， 可设置 可不设置
-        url = url.replace("normal", "selected");
-        $(this).find("img").attr("src", url);
-        //排他
-        // forEach 循环遍历
-        $(this).siblings().find("img").forEach(function (oImg) {
-            oImg.src = oImg.src.replace("selected", "normal");
-        });
-        //底部关联头部
-        let currentName = pageArray[$(this).index()];
-        $(".header").removeClass().addClass("header " + currentName);
-    });
-    /*处理公共的内容区域*/
+
     // 1. 获取SVG路径的长度
     let length = $("#refreshLogo")[0].getTotalLength();
     // 2. 默认先隐藏路径
@@ -360,7 +246,6 @@ $(function () {
         .catch(function (err) {
             console.log(err);
         });
-
     //处理播放量
     function formatNum(num) {
         //处理播放量

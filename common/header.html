@@ -1,0 +1,76 @@
+<!--头部 Start-->
+<div class="header-in">
+    <!--头部-->
+    <div class="header-default">
+        <div class="header-center">
+            <div class="header-center-box">
+                <img src="../common/images/topbar-it666-search.png" alt="...">
+                <input type="text" placeholder="心如止水 最近很火哦~">
+                <span class="header-title">我的音乐</span>
+                <div class="header-switch">
+                    <i></i>
+                    <span class="active">动态</span>
+                    <span>附近</span>
+                </div>
+            </div>
+        </div>
+        <div class="header-left"></div>
+        <div class="header-cancle">
+            <a href="#">取消</a>
+        </div>
+        <div class="header-right"></div>
+    </div>
+    <!--内容-->
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="search-ad">
+                <img src="./../common/images/search-banner.gif" alt="广告位" class="fluid-img">
+                <span>X</span>
+            </div>
+            <div class="search-history">
+                <div class="history-top">
+                    <h6>搜索历史</h6>
+                    <img src="./../common/images/search-it666-delete.png" alt="删除历史">
+                </div>
+                <ul class="history-bottom"></ul>
+            </div>
+            <div class="search-hot">
+                <div class="hot-top">
+                    <h6>热搜榜</h6>
+                </div>
+                <ul class="hot-bottom"></ul>
+            </div>
+            <div class="search-current">
+                <div class="current-top">
+                    搜索"jiang"
+                </div>
+                <ul class="current-bottom">
+                    <li>
+                        <img src="./../common/images/topbar-it666-search.png">
+                        <p>jiang</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!--搜索框热度数据-->
+<script id="hotDetail" type="text/html">
+    <% for(let i = 0; i < data.length; i++ ) {%>
+    <li>
+        <span class="hot-left"><%=(i+1)%></span>
+        <div class="hot-right">
+            <div>
+                <p>
+                    <strong><%=data[i].searchWord%></strong>
+                    <span><%=data[i].score%></span>
+                    <img src="<%=data[i].iconUrl%>">
+                </p>
+                <p><%=data[i].content%></p>
+            </div>
+        </div>
+    </li>
+    <%}%>
+</script>
+<!--头部 End-->
+<link rel="stylesheet" href="./../common/css/header.css">

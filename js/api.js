@@ -77,6 +77,10 @@
         static getHomeHotDetail(){
             return YMHttp.get("/search/hot/detail");
         }
+        //搜索框数据
+        static getHomeSearchSuggest(keyword){
+            return YMHttp.get("/search/suggest",{keywords:keyword,type:"mobile"});
+        }
 
     }
 
